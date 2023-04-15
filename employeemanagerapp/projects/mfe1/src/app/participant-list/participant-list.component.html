@@ -1,58 +1,88 @@
  
- <div class="container" id="main-container">
+ <div class="container .bg-primary" id="main-container">
 
-<h3>Room Id: {{room.id}}</h3>
-<h3>{{room.name}}</h3>
+<div class="row">
+   <h4><b>{{room.name}}</b></h4>
+</div>
+<div>Room Id: {{room.id}}</div>
+
+
 
 <participant-add [roomId]="room.id"
          (participantListUpdateEvent)="refetchParticipants($event)">
 </participant-add>
-
+<div class="row">
+   <h4>Search Participants</h4>
+</div>
 <div class = "row">
    <div class="col-6">
-      
       <input type="search" (ngModelChange)="searchParticipants(key.value)" #key="ngModel" ngModel
       name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search participants..." required>
    </div>
 </div>
-
-<h4 class = "row">Priority Participants</h4>
 <div class = "row">
-   
-   <table class = "col-md-12 col-xl-6">
-      <tr>
-         <th>Name</th>
-         <th>Date Joined</th>
-         <th>Edit</th>
-         <th>Delete</th>
-      </tr>
-      <tr  *ngFor="let participant of priorityParticipants" class="col-md-12 col-xl-6">
-         <td>{{participant?.name}}</td>
-         <td>{{getParticipantDateFormatted(participant?.created)}}</td>
-         <td><a (click)="onOpenModal(participant, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a></td>
-         <td> <a (click)="onOpenModal(participant, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a></td>
-      </tr>
-   </table>
+   <div *ngIf="searchResults?.length == 0" class="col-6">
+      <div class="alert alert-info" role="alert">
+        <p>No Participants were found.</p>
+      </div>     
+ </div>
 </div>
 
-<h4 class = "row">Non Priority Participants</h4>
-<div class = "row">
-   
-   <table class = "col-md-12 col-xl-6">
-      <tr>
-         <th>Name</th>
-         <th>Date Joined</th>
-         <th>Edit</th>
-         <th>Delete</th>
-      </tr>
-      <tr  *ngFor="let participant of nonPriorityParticipants" class="col-md-12 col-xl-6">
-         <td>{{participant?.name}}</td>
-         <td>{{getParticipantDateFormatted(participant?.created)}}</td>
-         <td><a (click)="onOpenModal(participant, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a></td>
-         <td> <a (click)="onOpenModal(participant, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a></td>
-      </tr>
-   </table>
+<div class ="row"> 
+   <div class="col-6">
+      <h4 class = "row">Priority Participants</h4>
+      <div class = "row">
+         <div class="col-12">
+            <table class = " table table-striped ">
+               <thead class="thead-dark">
+               <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Date Joined</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
+               </tr>
+               </thead>
+               <tbody>
+                  <tr  *ngFor="let participant of priorityParticipants" class="col-md-12 col-xl-6">
+                     <td>{{participant?.name}}</td>
+                     <td>{{getParticipantDateFormatted(participant?.created)}}</td>
+                     <td><a (click)="onOpenModal(participant, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a></td>
+                     <td> <a (click)="onOpenModal(participant, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a></td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+   <div class="col-6">
+      <h4 class = "row">Non Priority Participants</h4>
+      <div class = "row">
+         <div class="col-12">
+            <table class = " table table-striped ">
+               <thead class="thead-dark">
+               <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Date Joined</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
+               </tr>
+               </thead>
+               <tbody>
+                  <tr  *ngFor="let participant of nonPriorityParticipants" class="col-md-12 col-xl-6">
+                     <td>{{participant?.name}}</td>
+                     <td>{{getParticipantDateFormatted(participant?.created)}}</td>
+                     <td><a (click)="onOpenModal(participant, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a></td>
+                     <td> <a (click)="onOpenModal(participant, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a></td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
 </div>
+
+
+
 
  
  <!-- Edit Modal -->
@@ -98,6 +128,10 @@
       </div>
    </div>
  </div>
+  
+
+
+
  
  <!-- Delete Modal -->
  <div class="modal fade" id="deleteParticipantModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
@@ -120,14 +154,3 @@
    </div>
  </div>
  </div>
- 
- <!-- Notification for no participants -->
- <div *ngIf="searchResults?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
- <div class="alert alert-info" role="alert">
-   <h4 class="alert-heading">NO PARTICIPANTS!</h4>
-   <p>No Participants were found.</p>
- </div>
-
-
- </div>
- 

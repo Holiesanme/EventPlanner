@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Room } from './room/room';
 import { RoomService } from './room/room.service';
 
+
 @Component({
   selector: 'participant-list',
   templateUrl: './participant-list.component.html',

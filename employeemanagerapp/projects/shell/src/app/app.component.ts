@@ -20,10 +20,14 @@ export class AppComponent {
     this.roomId = 1;
   }
 
-  onParticipantListClick() {
+  public onParticipantListClick() {
     this.router.navigate(['mfe1/participant-list',this.roomId]); 
       //this.router.navigate(['mfe1', this.roomId]); 
-
     }
+
+   public goHome(){
+      this.router.navigate(['/']); 
+    }
+  
 }
 

@@ -1,14 +1,10 @@
 
-<label>Add further Participants:</label>
-<div class = "row">
-      
-      <div class="col-6">
-            <button class="btn btn-primary row">
-               <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Participant</a>
-            </button>
-      </div>
+<div class="row">
+   <h4>Add Participants</h4>
 </div>
-
+<div>
+   <a (click)="onOpenModal(null, 'add')" class="btn btn-primary " data-placement="top" data-original-title="Edit">Add Participant</a>
+</div>
  
  <!-- Add Participant Modal -->
 <div class="modal fade" id="addParticipantModal" tabindex="-1" role="dialog" aria-labelledby="addParticipantModalLabel" aria-hidden="true">
@@ -30,14 +26,6 @@
               <label for="priority">Has Priority</label>
               <input type="checkbox" ngModel name="priority" class="form-control" id="priority" placeholder="Has Priority">
            </div>
-           <div class="form-group">
-              <label for="team">Team</label>
-              <input type="number" ngModel name="team" class="form-control" id="team" placeholder="Team" >
-           </div>
-           <div class="form-group">
-            <label for="rating">Rating</label>
-            <input type="number" ngModel name="rating" class="form-control" id="rating" placeholder="Rating">
-         </div>
               <div class="modal-footer">
               <button type="button" id="add-participant-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>

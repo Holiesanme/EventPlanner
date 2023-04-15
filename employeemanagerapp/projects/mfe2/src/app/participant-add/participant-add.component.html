@@ -1,44 +1,123 @@
  
  <div class="container" id="main-container">
- 
-   <h4 class = "row">Priority Participants</h4>
-   <div class = "row">
-      
-      <table class = "col-md-12 col-xl-6">
-         <tr>
-            <th>Name</th>
-            <th>Date Joined</th>
-            <th>Edit</th>
-            <th>Delete</th>
-         </tr>
-         <tr  *ngFor="let participant of priorityParticipants" class="col-md-12 col-xl-6">
-            <td>{{participant?.name}}</td>
-            <td>{{participant?.created}}</td>
-            <td><a (click)="onOpenModal(participant, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a></td>
-            <td> <a (click)="onOpenModal(participant, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a></td>
-         </tr>
-      </table>
+
+   <div class="row">
+      <h4><b>{{room.name}}</b></h4>
    </div>
+   <div>Room Id: {{room.id}}</div>
    
-   <h4 class = "row">Non Priority Participants</h4>
-   <div class = "row">
-      
-      <table class = "col-md-12 col-xl-6">
-         <tr>
-            <th>Name</th>
-            <th>Date Joined</th>
-            <th>Edit</th>
-            <th>Delete</th>
-         </tr>
-         <tr  *ngFor="let participant of nonPriorityParticipants" class="col-md-12 col-xl-6">
-            <td>{{participant?.name}}</td>
-            <td>{{participant?.created}}</td>
-            <td><a (click)="onOpenModal(participant, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a></td>
-            <td> <a (click)="onOpenModal(participant, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a></td>
-         </tr>
-      </table>
+   <div class="row">
+      <h4>Randomize Teams</h4>
+   </div>
+   <div>
+      <a (click)="randomizeParticipantTeams()" class="btn btn-primary" data-placement="top" data-original-title="Randomize">Randomize Teams</a>
+   </div>
+
+   <div class ="row"> 
+      <div class="col-6" *ngIf="priorityParticipants.length !=0">
+         <h4 class = "row">Priority Participants</h4>
+         <div class = "row">
+            <div class="col-12">
+               <table class = " table table-striped ">
+                  <thead class="thead-dark">
+                  <tr>
+                     <th scope="col">Name</th>
+                     <th scope="col">Date Joined</th>
+                     <th scope="col">Team 1</th>
+                     <th scope="col">Team 2</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                     <tr  *ngFor="let participant of priorityParticipants" class="col-md-12 col-xl-6">
+                        <td>{{participant?.name}}</td>
+                        <td>{{getParticipantDateFormatted(participant?.created)}}</td>
+                        <td><a (click)="moveToTeam1(participant)" class="btn btn-primary tooltips" data-placement="top" data-original-title="Team1"><i class="fa fa-arrow-left"></i> </a></td>
+                        <td> <a (click)="moveToTeam2(participant)" class="btn btn-primary tooltips" data-placement="top" data-original-title="Team2"><i class="fa fa-arrow-right"></i></a></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="col-6" *ngIf="nonPriorityParticipants.length !=0">
+         <h4 class = "row">Non Priority Participants</h4>
+         <div class = "row">
+            <div class="col-12">
+               <table class = " table table-striped ">
+                  <thead class="thead-dark">
+                  <tr>
+                     <th scope="col">Name</th>
+                     <th scope="col">Date Joined</th>
+                     <th scope="col">Team 1</th>
+                     <th scope="col">Team 2</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                     <tr  *ngFor="let participant of nonPriorityParticipants" class="col-md-12 col-xl-6">
+                        <td>{{participant?.name}}</td>
+                        <td>{{getParticipantDateFormatted(participant?.created)}}</td>
+                        <td><a (click)="moveToTeam1(participant)" class="btn btn-primary tooltips" data-placement="top" data-original-title="Team1"><i class="fa fa-arrow-left"></i> </a></td>
+                        <td> <a (click)="moveToTeam2(participant)" class="btn btn-primary tooltips" data-placement="top" data-original-title="Team2"><i class="fa fa-arrow-right"></i></a></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
    </div>
  
- 
+
+   <div class ="row"> 
+      <div class="col-6">
+         <h4 class = "row">Team 1</h4>
+         <div class = "row">
+            <div class="col-12">
+               <table class = "table table-striped ">
+                  <thead class="thead-dark">
+                  <tr>
+                     <th scope="col">Name</th>
+                     <th scope="col">Date Joined</th>
+                     <th scope="col">Change</th>
+                     <th scope="col">Reset</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                     <tr  *ngFor="let participant of team1Participants" class="col-md-12 col-xl-6">
+                        <td>{{participant?.name}}</td>
+                        <td>{{getParticipantDateFormatted(participant?.created)}}</td>
+                        <td><a (click)="moveToTeam2(participant)" class="btn btn-primary tooltips" data-placement="top" data-original-title="Team2"><i class="fa fa-arrow-right"></i> </a></td>
+                        <td><a (click)="resetTeam(participant)" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-times"></i> </a></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="col-6">
+         <h4 class = "row">Team 2</h4>
+         <div class = "row">
+            <div class="col-12">
+               <table class = "table table-striped ">
+                  <thead class="thead-dark">
+                  <tr>
+                     <th scope="col">Name</th>
+                     <th scope="col">Date Joined</th>
+                     <th scope="col">Change</th>
+                     <th scope="col">Reset</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                     <tr  *ngFor="let participant of team2Participants" class="col-md-12 col-xl-6">
+                        <td>{{participant?.name}}</td>
+                        <td>{{getParticipantDateFormatted(participant?.created)}}</td>
+                        <td><a (click)="moveToTeam1(participant)" class="btn btn-primary tooltips" data-placement="top" data-original-title="Team1"><i class="fa fa-arrow-left"></i> </a></td>
+                        <td><a (click)="resetTeam(participant)" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-times"></i> </a></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
    

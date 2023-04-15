@@ -11,7 +11,7 @@ import { ParticipantService } from './participant-list/participant/participant.s
   imports: [
     BrowserModule,
     ParticipantsOverviewModule,
-    RouterModule.forRoot(APP1_ROUTES)
+    RouterModule.forRoot(APP1_ROUTES),
   ],
   declarations: [
     HomeComponent,

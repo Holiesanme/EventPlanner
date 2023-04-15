@@ -18,6 +18,8 @@ export class ParticipantAddComponent {
   public participants: Participant[];
   priorityParticipants: Participant[];
   nonPriorityParticipants: Participant[];
+  team1Participants: Participant[];
+  team2Participants: Participant[];
 
   constructor(private participantService: ParticipantService,
             private roomService:RoomService,
@@ -39,8 +41,11 @@ export class ParticipantAddComponent {
     this.participantService.getParticipantsByRoom(roomId).subscribe(
       (response: Participant[]) => {
         this.participants = response;
-        this.priorityParticipants = this.participants.filter((participant) => participant.priority)
-        this.nonPriorityParticipants = this.participants.filter((participant) => !participant.priority)
+        this.priorityParticipants = this.participants.filter((participant) => participant.priority && participant.team == null);
+        this.nonPriorityParticipants = this.participants.filter((participant) => !participant.priority && participant.team == null);
+        this.team1Participants = this.participants.filter((participant)=> participant.team===1);
+        this.team2Participants = this.participants.filter((participant)=> participant.team===2);
+
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -59,6 +64,34 @@ export class ParticipantAddComponent {
         alert(error.message);
       }
     );
+  }
+
+  public getParticipantDateFormatted(date: Date){
+    return new Date(date).toLocaleString();
+  }
+  
+  public moveToTeam1(participant:Participant){
+    participant.team=1;
+    this.onUpdateParticipant(participant);
+  }
+
+  public moveToTeam2(participant:Participant){
+    participant.team=2;
+    this.onUpdateParticipant(participant);
+  }
+  public resetTeam(participant:Participant){
+    participant.team=null;
+    this.onUpdateParticipant(participant);
+  }
+
+  public randomizeParticipantTeams(){
+    this.participants.forEach(participant => {
+      var number= Math.round(Math.random()) ;
+      number = number +1;
+      participant.team =  number;
+      this.onUpdateParticipant(participant);
+    });
+    
   }
 
 }
