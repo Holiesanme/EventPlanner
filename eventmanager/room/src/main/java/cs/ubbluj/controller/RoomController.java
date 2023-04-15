@@ -1,5 +1,6 @@
 package cs.ubbluj.controller;
 
+import cs.ubbluj.exception.RoomNotFoundException;
 import cs.ubbluj.model.Room;
 import cs.ubbluj.service.RoomService;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,14 @@ public class RoomController {
 
     @GetMapping("/find/{id}")
     public ResponseEntity<Room> getRoomById(@PathVariable("id") Long id) {
-        Room room = roomService.findRoomById(id);
-        return new ResponseEntity<>(room, HttpStatus.OK);
+        try{
+            Room room = roomService.findRoomById(id);
+            return new ResponseEntity<>(room, HttpStatus.OK);
+
+        }catch(RoomNotFoundException e)
+        {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/add")

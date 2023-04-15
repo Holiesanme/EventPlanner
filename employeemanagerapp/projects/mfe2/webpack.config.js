@@ -5,7 +5,7 @@ module.exports = withModuleFederationPlugin({
   name: 'mfe2',
 
   exposes: {
-    './Module': './projects/mfe2/src/app/participantadd.module.ts',
+    './Module': './projects/mfe2/src/app/teamorganizer.module.ts',
   },
 
   shared: {

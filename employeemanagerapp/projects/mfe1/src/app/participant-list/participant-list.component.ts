@@ -37,6 +37,9 @@ export class ParticipantListComponent {
         this.room = response;
         console.log(this.room);
         this.getParticipantsByRoom(this.room.id);
+      },
+       (error: HttpErrorResponse) => {
+        
       }
     );
     
@@ -57,6 +60,7 @@ export class ParticipantListComponent {
 
       },
       (error: HttpErrorResponse) => {
+
         alert(error.message);
       }
     );
@@ -64,6 +68,9 @@ export class ParticipantListComponent {
 
 
   public onUpdateParticipant(participant: Participant): void {
+    console.log("update:")
+    console.log(participant);
+
     this.participantService.updateParticipant(participant).subscribe(
       (response: Participant) => {
         console.log(response);

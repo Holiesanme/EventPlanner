@@ -8,11 +8,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Room } from './room/room';
 
 @Component({
-  selector: 'participant-add',
-  templateUrl: './participant-add.component.html',
-  styleUrls: ['./participant-add.component.css']
+  selector: 'team-organizer',
+  templateUrl: './team-organizer.component.html',
+  styleUrls: ['./team-organizer.component.css']
 })
-export class ParticipantAddComponent {
+export class TeamOrganizerComponent {
 
   public room: Room;
   public participants: Participant[];

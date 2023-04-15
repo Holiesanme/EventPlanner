@@ -1,8 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Room } from './room/room';
-import { RoomService } from './room/room.service';
-import { ActivatedRoute, Router } from '@angular/router';
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +20,7 @@ export class AppComponent {
 
   public onParticipantListClick() {
     this.router.navigate(['mfe1/participant-list',this.roomId]); 
-      //this.router.navigate(['mfe1', this.roomId]); 
+      //this.router.navigate(['mfe1', this.roomId]);
     }
 
    public goHome(){

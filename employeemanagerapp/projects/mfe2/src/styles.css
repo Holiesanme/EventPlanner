@@ -9,6 +9,12 @@ a {
   cursor: pointer;
 }
 
+.center {
+  text-align: center;
+  width: 50%;
+}
+
+
 .navbar {
   margin-bottom: 30px;
 }

@@ -29,3 +29,7 @@ button:active {
     border: 2px darkred dashed;
     padding: 20px;
 }
+
+.centerText {
+    text-align: center;
+}

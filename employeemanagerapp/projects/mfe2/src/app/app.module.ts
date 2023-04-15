@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ParticipantAddModule } from './participantadd.module';
+import { TeamOrganizerModule } from './teamorganizer.module';
 import { APP_ROUTES } from './app.routes';
 
 @NgModule({
   imports: [
     BrowserModule,
-    ParticipantAddModule,
+    TeamOrganizerModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
   declarations: [

@@ -29,7 +29,7 @@ export const APP_ROUTES: Routes = [
               remoteEntry: 'http://localhost:4202/remoteEntry.js',
               exposedModule: './Module'
           })
-          .then(m => m.ParticipantAddModule)
+          .then(m => m.TeamOrganizerModule)
 
     },
 

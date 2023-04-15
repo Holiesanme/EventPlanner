@@ -1,19 +1,23 @@
  
- <div class="container .bg-primary" id="main-container">
-
-<div class="row">
-   <h4><b>{{room.name}}</b></h4>
-</div>
-<div>Room Id: {{room.id}}</div>
-
+ <h4 class="centerText" *ngIf="room?.id == null">
+   Room not found!
+ </h4>
+ 
+ <div *ngIf="room?.id != null" class="container .bg-primary" id="main-container">
 
 
-<participant-add [roomId]="room.id"
+
+<h4 class="centerText"><b>{{room.name}}</b></h4>
+<div class="centerText">Room: {{room.id}}</div>
+
+
+
+<participant-add class="col-6" [roomId]="room.id"
          (participantListUpdateEvent)="refetchParticipants($event)">
 </participant-add>
-<div class="row">
-   <h4>Search Participants</h4>
-</div>
+
+   <h4>Search Attending Participants</h4>
+
 <div class = "row">
    <div class="col-6">
       <input type="search" (ngModelChange)="searchParticipants(key.value)" #key="ngModel" ngModel
@@ -30,7 +34,7 @@
 
 <div class ="row"> 
    <div class="col-6">
-      <h4 class = "row">Priority Participants</h4>
+      <h4 class="centerText">Priority Participants</h4>
       <div class = "row">
          <div class="col-12">
             <table class = " table table-striped ">
@@ -55,7 +59,7 @@
       </div>
    </div>
    <div class="col-6">
-      <h4 class = "row">Non Priority Participants</h4>
+      <h4 class="centerText">Non Priority Participants</h4>
       <div class = "row">
          <div class="col-12">
             <table class = " table table-striped ">
@@ -103,21 +107,14 @@
                </div>
                <div class="form-group">
                   <label for="priority">Has Priority</label>
-                  <input type="checkbox" ngModel="{{editParticipant?.priority}}" name="priority" class="form-control" id="priority" aria-describedby="priority" placeholder="Name">
+                  <input type="checkbox" ngModel="{{editParticipant?.priority}}" name="priority" class="form-control" id="priority" aria-describedby="priority" placeholder="Priority">
                </div>
+               <div class="form-group">
                   <input type="hidden" ngModel="{{editParticipant?.id}}" name="id" class="form-control" id="id" placeholder="Id">
                   <input type="hidden" ngModel="{{editParticipant?.created}}" name="created" class="form-control" id="created" placeholder="Created">
-               <div class="form-group">
-                  <label for="team">Team</label>
-                  <input type="number" ngModel="{{editParticipant?.team}}" name="team" class="form-control" id="team" placeholder="Team">
-               </div>
-               <div class="form-group">
-                  <label for="phone">Rating</label>
-                  <input type="text" ngModel="{{editParticipant?.rating}}" name="rating" class="form-control" id="rating" placeholder="Rating">
-               </div>
-               <div class="form-group">
-                  <label for="phone">Room Id</label>
-                  <input type="text" ngModel="{{editParticipant?.roomId}}" name="roomId" class="form-control" id="roomId" name="roomId" placeholder="Phone">
+                  <input type="hidden" ngModel="{{editParticipant?.team}}" name="team" class="form-control" id="team" placeholder="Team">
+                  <input type="hidden" ngModel="{{editParticipant?.rating}}" name="rating" class="form-control" id="rating" placeholder="Rating">
+                  <input type="hidden" ngModel="{{editParticipant?.roomId}}" name="roomId" class="form-control" id="roomId" name="roomId" placeholder="RoomId">
                </div>
                 <div class="modal-footer">
                   <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>

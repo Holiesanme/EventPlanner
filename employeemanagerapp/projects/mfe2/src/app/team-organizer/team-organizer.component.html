@@ -1,21 +1,21 @@
  
- <div class="container" id="main-container">
+  
+ <h4 class="centerText" *ngIf="room?.id == null">
+   Room not found!
+ </h4>
+ 
 
-   <div class="row">
-      <h4><b>{{room.name}}</b></h4>
-   </div>
-   <div>Room Id: {{room.id}}</div>
-   
-   <div class="row">
+ <div *ngIf="room?.id != null" class="container" id="main-container">
+      <h4 class="centerText"><b>{{room.name}}</b></h4>
+      <div class="centerText">Room: {{room.id}}</div>
       <h4>Randomize Teams</h4>
-   </div>
    <div>
       <a (click)="randomizeParticipantTeams()" class="btn btn-primary" data-placement="top" data-original-title="Randomize">Randomize Teams</a>
    </div>
 
    <div class ="row"> 
       <div class="col-6" *ngIf="priorityParticipants.length !=0">
-         <h4 class = "row">Priority Participants</h4>
+         <h4 class="centerText">Priority Participants</h4>
          <div class = "row">
             <div class="col-12">
                <table class = " table table-striped ">
@@ -40,7 +40,7 @@
          </div>
       </div>
       <div class="col-6" *ngIf="nonPriorityParticipants.length !=0">
-         <h4 class = "row">Non Priority Participants</h4>
+         <h4 class="centerText">Non Priority Participants</h4>
          <div class = "row">
             <div class="col-12">
                <table class = " table table-striped ">
@@ -69,7 +69,7 @@
 
    <div class ="row"> 
       <div class="col-6">
-         <h4 class = "row">Team 1</h4>
+         <h4 class="centerText">Team 1</h4>
          <div class = "row">
             <div class="col-12">
                <table class = "table table-striped ">
@@ -94,7 +94,7 @@
          </div>
       </div>
       <div class="col-6">
-         <h4 class = "row">Team 2</h4>
+         <h4 class="centerText">Team 2</h4>
          <div class = "row">
             <div class="col-12">
                <table class = "table table-striped ">

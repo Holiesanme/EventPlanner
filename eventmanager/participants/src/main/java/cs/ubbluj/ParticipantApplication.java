@@ -12,10 +12,8 @@ import java.util.Arrays;
 @SpringBootApplication
 public class ParticipantApplication {
     public static void main(String[] args) {
-
         SpringApplication.run(ParticipantApplication.class, args);
     }
-
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();

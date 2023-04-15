@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
   }
 
   private redirectToTeamOrganize(roomId:number): void{
-    this.router.navigate(['mfe2/participant-add', roomId]);
+    this.router.navigate(['mfe2/team-organizer', roomId]);
 
   }
 

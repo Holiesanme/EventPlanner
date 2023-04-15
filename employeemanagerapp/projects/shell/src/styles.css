@@ -4,8 +4,8 @@
 
 
 body {
-  background-color: #e0fbfc;
-  
+  background-image: url(sports-wallpaper.jpg);
+  background-size: cover;
 }
 
 a {
