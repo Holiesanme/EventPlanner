@@ -1,0 +1,133 @@
+ 
+ <div class="container" id="main-container">
+
+<h3>Room Id: {{room.id}}</h3>
+<h3>{{room.name}}</h3>
+
+<participant-add [roomId]="room.id"
+         (participantListUpdateEvent)="refetchParticipants($event)">
+</participant-add>
+
+<div class = "row">
+   <div class="col-6">
+      
+      <input type="search" (ngModelChange)="searchParticipants(key.value)" #key="ngModel" ngModel
+      name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search participants..." required>
+   </div>
+</div>
+
+<h4 class = "row">Priority Participants</h4>
+<div class = "row">
+   
+   <table class = "col-md-12 col-xl-6">
+      <tr>
+         <th>Name</th>
+         <th>Date Joined</th>
+         <th>Edit</th>
+         <th>Delete</th>
+      </tr>
+      <tr  *ngFor="let participant of priorityParticipants" class="col-md-12 col-xl-6">
+         <td>{{participant?.name}}</td>
+         <td>{{getParticipantDateFormatted(participant?.created)}}</td>
+         <td><a (click)="onOpenModal(participant, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a></td>
+         <td> <a (click)="onOpenModal(participant, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a></td>
+      </tr>
+   </table>
+</div>
+
+<h4 class = "row">Non Priority Participants</h4>
+<div class = "row">
+   
+   <table class = "col-md-12 col-xl-6">
+      <tr>
+         <th>Name</th>
+         <th>Date Joined</th>
+         <th>Edit</th>
+         <th>Delete</th>
+      </tr>
+      <tr  *ngFor="let participant of nonPriorityParticipants" class="col-md-12 col-xl-6">
+         <td>{{participant?.name}}</td>
+         <td>{{getParticipantDateFormatted(participant?.created)}}</td>
+         <td><a (click)="onOpenModal(participant, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a></td>
+         <td> <a (click)="onOpenModal(participant, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a></td>
+      </tr>
+   </table>
+</div>
+
+ 
+ <!-- Edit Modal -->
+ <div class="modal fade" id="updateParticipantModal" tabindex="-1" role="dialog" aria-labelledby="participantEditModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="updateParticipantModalLabel">Edit Participant {{editParticipant?.name}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form #editForm="ngForm">
+               <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" ngModel="{{editParticipant?.name}}" name="name" class="form-control" id="name" aria-describedby="name" placeholder="Name">
+               </div>
+               <div class="form-group">
+                  <label for="priority">Has Priority</label>
+                  <input type="checkbox" ngModel="{{editParticipant?.priority}}" name="priority" class="form-control" id="priority" aria-describedby="priority" placeholder="Name">
+               </div>
+                  <input type="hidden" ngModel="{{editParticipant?.id}}" name="id" class="form-control" id="id" placeholder="Id">
+                  <input type="hidden" ngModel="{{editParticipant?.created}}" name="created" class="form-control" id="created" placeholder="Created">
+               <div class="form-group">
+                  <label for="team">Team</label>
+                  <input type="number" ngModel="{{editParticipant?.team}}" name="team" class="form-control" id="team" placeholder="Team">
+               </div>
+               <div class="form-group">
+                  <label for="phone">Rating</label>
+                  <input type="text" ngModel="{{editParticipant?.rating}}" name="rating" class="form-control" id="rating" placeholder="Rating">
+               </div>
+               <div class="form-group">
+                  <label for="phone">Room Id</label>
+                  <input type="text" ngModel="{{editParticipant?.roomId}}" name="roomId" class="form-control" id="roomId" name="roomId" placeholder="Phone">
+               </div>
+                <div class="modal-footer">
+                  <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                  <button (click)="onUpdateParticipant(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+ </div>
+ 
+ <!-- Delete Modal -->
+ <div class="modal fade" id="deleteParticipantModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="deleteModelLabel">Delete Participant</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <p>Are you sure you want to delete participant {{deleteParticipant?.name}}?</p>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+               <button (click)="onDeleteParticipant(deleteParticipant?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+            </div>
+         </div>
+      </div>
+   </div>
+ </div>
+ </div>
+ 
+ <!-- Notification for no participants -->
+ <div *ngIf="searchResults?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+ <div class="alert alert-info" role="alert">
+   <h4 class="alert-heading">NO PARTICIPANTS!</h4>
+   <p>No Participants were found.</p>
+ </div>
+
+
+ </div>
+ 

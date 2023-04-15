@@ -1,0 +1,53 @@
+
+<h1>Distributed sports event hosting platform</h1>
+<div>Create or Join a room</div>
+<div class="container" id="main-container">
+
+    <div class = "row">
+        <h4>Create Room for event</h4>
+    </div>
+    <form #addForm="ngForm" (ngSubmit)="onCreateRoom(addForm)" >
+        <label  for="name">Add Room Description</label>
+        <div class="row">
+            <div class="col-6">
+                <input type="text" ngModel name="name" class="form-control " id="name" placeholder="Name" required>
+            </div>
+            <div class="col-6">
+                <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Create Room</button>
+            </div>
+        </div>
+    </form>
+
+
+    <div class = "row">
+        <h4> Join already created rooms </h4>
+    </div>
+    <form #joinForm="ngForm" (ngSubmit)="onJoinRoom(joinForm)">
+        <label for="roomId">Enter Room ID</label>
+        <div class="row">
+            <div class="col-6">
+                <input type="number" ngModel name="roomId" class="form-control" id="roomId" placeholder="RoomId" required>
+            </div>
+            <div class="col-6">
+                <button [disabled]="joinForm.invalid" type="submit" class="btn btn-primary" >Join Room</button>
+            </div>
+        </div>
+    </form>
+
+
+    <div class = "row">
+        <h4> Have enough participants? Organize your teams here:</h4>
+    </div>
+    <form #joinTeamOrganizeForm="ngForm" (ngSubmit)="onJoinTeamOrganize(joinTeamOrganizeForm)">
+        <label for="roomId">Enter Room ID</label>
+        <div class="row">
+            <div class="col-6">
+                <input type="number" ngModel name="roomId" class="form-control" id="roomId" placeholder="RoomId" required>
+            </div>
+            <div class="col-6">
+                <button [disabled]="joinTeamOrganizeForm.invalid" type="submit" class="btn btn-primary" >Organize Teams</button>
+            </div>
+        </div>
+    </form>
+
+</div>

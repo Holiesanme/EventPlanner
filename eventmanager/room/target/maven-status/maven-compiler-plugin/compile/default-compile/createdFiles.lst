@@ -1,0 +1,6 @@
+cs\ubbluj\controller\RoomController.class
+cs\ubbluj\service\RoomService.class
+cs\ubbluj\repo\RoomRepo.class
+cs\ubbluj\exception\RoomNotFoundException.class
+cs\ubbluj\EventRoomApplication.class
+cs\ubbluj\model\Room.class

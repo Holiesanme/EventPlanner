@@ -1,0 +1,5 @@
+cs\ubbluj\controller\WeatherController.class
+cs\ubbluj\model\Weather.class
+cs\ubbluj\WeatherApplication.class
+cs\ubbluj\service\WeatherService.class
+cs\ubbluj\mapper\WeatherMapper.class

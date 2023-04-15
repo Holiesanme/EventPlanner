@@ -1,0 +1,6 @@
+cs\ubbluj\service\QuotesRatingService.class
+cs\ubbluj\model\Rating.class
+cs\ubbluj\QuotesRatingApplication.class
+cs\ubbluj\repository\RatingRepo.class
+cs\ubbluj\model\Quote.class
+cs\ubbluj\controller\QuotesRatingController.class

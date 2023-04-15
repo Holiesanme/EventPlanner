@@ -1,0 +1,11 @@
+FROM node:latest as node
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm run build
+
+#stage 2
+FROM nginx:alpine
+COPY nginxshell.conf /etc/nginx/nginx.conf
+COPY --from=node /app/dist/shell /usr/share/nginx/html
+

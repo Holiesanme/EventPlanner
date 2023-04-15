@@ -1,0 +1,63 @@
+version: '3.8'
+services:
+
+  participants:
+    image: participants
+    ports:
+      - '8083:8083'
+    depends_on:
+      - db
+    restart: always
+    build: ./eventmanager/participants/
+  room:
+    image: room
+    ports:
+      - '8081:8081'
+    depends_on:
+      - db
+    restart: always
+    build: ./eventmanager/room/
+ 
+  db:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=eventmanager
+      - MYSQL_ROOT_PASSWORD=whoami1212
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  mfe1:
+    image: mfe1
+    ports:
+      - '4201:4201'
+    depends_on:
+      - room
+    restart: always
+  mfe2:
+    image: mfe2
+    ports:
+      - '4202:4202'
+    depends_on:
+      - participants
+      - room
+    restart: always
+  shell:
+    image: shell
+    ports:
+      - '4200:4200'
+    depends_on:
+      - room
+      - mfe1
+      - mfe2
+    restart: always
+        
+
+volumes:
+  db:
+    driver: local
