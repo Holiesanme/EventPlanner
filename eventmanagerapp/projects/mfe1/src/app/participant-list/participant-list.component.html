@@ -103,7 +103,7 @@
             <form #editForm="ngForm">
                <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" ngModel="{{editParticipant?.name}}" name="name" class="form-control" id="name" aria-describedby="name" placeholder="Name">
+                  <input type="text" ngModel="{{editParticipant?.name}}" name="name" maxlength="20" class="form-control" id="name" aria-describedby="name" placeholder="Name">
                </div>
                <div class="form-group">
                   <label for="priority">Has Priority</label>

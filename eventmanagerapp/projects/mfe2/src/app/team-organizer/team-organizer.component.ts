@@ -18,6 +18,7 @@ export class TeamOrganizerComponent {
   public participants: Participant[];
   priorityParticipants: Participant[];
   nonPriorityParticipants: Participant[];
+  
   team1Participants: Participant[];
   team2Participants: Participant[];
 

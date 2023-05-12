@@ -24,12 +24,12 @@ public class ParticipantService {
         this.participantRepo = participantRepo;
     }
 
-    public Participant addParticipant(Participant room) {
-        return participantRepo.save(room);
+    public Participant addParticipant(Participant participant) {
+        return participantRepo.save(participant);
     }
 
-    public Participant updateParticipant(Participant room) {
-        return participantRepo.save(room);
+    public Participant updateParticipant(Participant participant) {
+        return participantRepo.save(participant);
     }
 
     public Participant findParticipantById(Long id) {
@@ -37,8 +37,8 @@ public class ParticipantService {
                 .orElseThrow(() -> new ParticipantNotFoundException("Participant by id " + id + " was not found"));
     }
 
-    public List<Participant> findParticipantsByRoomId(Long roomId) {
-        return participantRepo.findByRoomId(roomId);
+    public List<Participant> findParticipantsByRoomId(Long participantId) {
+        return participantRepo.findByRoomId(participantId);
     }
     public void deleteParticipant(Long id){
         participantRepo.deleteParticipantById(id);

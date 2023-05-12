@@ -15,7 +15,7 @@ public class Room implements Serializable {
 
     public Room() {}
 
-    public Room(Long id, String name, String imageUrl) {
+    public Room(Long id, String name) {
         this.id = id;
         this.name = name;
     }
