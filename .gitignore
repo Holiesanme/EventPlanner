@@ -313,3 +313,8 @@ content/example-playground
 Thumbs.db
 
 */.angular/cache
+
+.classpath
+.project
+.settings/
+target/

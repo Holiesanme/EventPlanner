@@ -1,11 +1,10 @@
-# SOA
+# Event Manager Application
 
 To build the backend applications:
+
 Maven clean install all the modules
-docker build -t weather
-docker build -t employee
-docker build -t quotes
-docker build -t quotesrating
+docker build -t room
+docker build -t participants
 
 
 Run inside /eventmanagerapp to build docker images

@@ -7,6 +7,7 @@ import { Participant } from './participant';
 export class ParticipantService {
   private apiServerUrl = 'http://localhost:8083';
 
+
   constructor(private http: HttpClient){}
 
   public getParticipants(): Observable<Participant[]> {
